@@ -5,19 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>西电教学楼导航</title>
-    <link rel="stylesheet" href="css/navi.css" />
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.14&key=ce9c435f5ccc9e3a54ca63080f43ac88&plugin=AMap.Walking"></script>
     <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
 </head>
 <body>
+
 	<div id="container"></div>
 	<div id="panel"></div>
+     <div class="container">
+        <br>
+        <div class="alert alert-success" role="alert"><strong>您可以从B楼的{{ classroom_entry }}进入B楼</strong></div>
+    </div>
+
+
+
+
 <script type="text/javascript">
 	var init = function(startX, startY){
 		var map = new AMap.Map("container", {
+		    mapStyle: 'amap://styles/fresh',
 			resizeEnable: true,
 			center: [108.834906,34.125093],//地图中心点
-			zoom: 16 //地图显示的缩放级别
+			zoom: 15 //地图显示的缩放级别
 		});
 		//步行导航
 		var walking = new AMap.Walking({
@@ -26,14 +38,9 @@
 		});
 		//根据起终点坐标规划步行路线
 		walking.search([startX,startY], [108.832004,34.126012], function(status, result) {
-			// result即是对应的步行路线数据信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_WalkingResult
-			if (status === 'complete') {
-				log.success('绘制步行路线完成')
-			} else {
-				log.error('步行路线数据查询失败' + result)
-			}
+
 		});
-	}
+	};
 
 	var LocString = String(window.document.location.href);
 	function getQueryStr(str) {
@@ -42,8 +49,10 @@
 		// parameter cannot be found
 		return "";
 	}
-	var x = parseFloat(getQueryStr("x"));
-	var y = parseFloat(getQueryStr("y"));
+	{#var x = parseFloat(getQueryStr("x"));#}
+	{#var y = parseFloat(getQueryStr("y"));#}
+    var x = {{ x }};
+    var y = {{ y }};
 	console.log(x);
 	console.log(y);
 	init(x, y)
@@ -55,7 +64,7 @@
 body,
 #container {
 	width: 100%;
-	height: 100%;
+	height: 95%;
 }
 #panel {
 	position: fixed;
@@ -63,8 +72,8 @@ body,
 	max-height: 90%;
 	overflow-y: auto;
 	top: 10px;
-	right: 10px;
-	width: 280px;
+	right: 3px;
+	width: 150px;
 }
 #panel .amap-call {
 	background-color: #009cf9;

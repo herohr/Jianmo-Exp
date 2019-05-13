@@ -17,10 +17,11 @@
     </div>
     <form action="/navi/" method="post">
     <div class="row">
+        {{ error_message }}
         <div class="form-group">
             {% csrf_token %}
-            <label class="col-sm-2 control-label">宿舍楼号：</label>
-            <div class="col-sm-2">
+            <label class="col-sm-6 control-label">宿舍楼号：</label>
+            <div class="col-sm-6">
                 <select id="se" name="dorm" class="selectpicker show-tick form-control" multiple data-live-search="false">
                         {% for key, val in dicts.items %}
                             <option value="{{ key }}">{{ val.name }}</option>
@@ -33,8 +34,8 @@
 
     <div class="row">
         <div class="form-group">
-            <label class="col-sm-2 control-label">教室号：</label>
-            <div class="col-sm-2">
+            <label class="col-sm-6 control-label">教室号：</label>
+            <div class="col-sm-6">
                 <input name="classroom" type="text" class="form-control"/>
                 <br/>
                 <input type="submit" class="btn btn-primary">
@@ -42,6 +43,12 @@
         </div>
     </div>
     </form>
+
+<style>
+    .row{
+        height: 200px;
+    }
+</style>
 </div>
 </body>
 </html>
