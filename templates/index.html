@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <title>西电B楼导航</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1 class="text-primary">西电B楼导航</h1>
+    </div>
+    <form action="/navi/" method="post">
+    <div class="row">
+        <div class="form-group">
+            {% csrf_token %}
+            <label class="col-sm-2 control-label">宿舍楼号：</label>
+            <div class="col-sm-2">
+                <select id="se" name="dorm" class="selectpicker show-tick form-control" multiple data-live-search="false">
+                        {% for key, val in dicts.items %}
+                            <option value="{{ key }}">{{ val.name }}</option>
+                        {% endfor %}
+                </select>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">教室号：</label>
+            <div class="col-sm-2">
+                <input name="classroom" type="text" class="form-control"/>
+                <br/>
+                <input type="submit" class="btn btn-primary">
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+</body>
+</html>
